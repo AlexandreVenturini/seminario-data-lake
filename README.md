@@ -4,31 +4,25 @@ Projeto desenvolvido para a disciplina de Banco de Dados III.
 
 ## Objetivo
 
-Simular uma arquitetura moderna de Data Lake utilizando:
-
-* Arquivos CSV e JSON
-* Processo ETL
-* Armazenamento em Parquet
-* Consultas analíticas com DuckDB
+Simular um ambiente de Data Lake utilizando arquivos CSV e JSON, realizando consultas SQL diretamente sobre os dados através do DuckDB.
 
 O projeto demonstra conceitos relacionados a:
 
-* Data Lakes
+* Cloud Storage (simulado localmente)
+* Data Lake
 * Lakehouse
-* ETL (Extract, Transform, Load)
-* OLAP
+* Armazenamento moderno de dados
+* Consultas analíticas com SQL
 * Engenharia de Dados
-* Armazenamento analítico
 
 ---
 
 # Tecnologias utilizadas
 
 * Python
-* Pandas
 * DuckDB
-* PyArrow
-* Parquet
+* CSV
+* JSON
 
 ---
 
@@ -38,11 +32,11 @@ O projeto demonstra conceitos relacionados a:
 seminario-data-lake/
 │
 ├── data_lake/
-│   ├── raw/
-│   └── processed/
+│   └── raw/
+│       ├── vendas_janeiro.csv
+│       └── vendas_fevereiro.json
 │
 ├── scripts/
-│   ├── etl.py
 │   └── consulta.py
 │
 ├── venv/
@@ -52,46 +46,31 @@ seminario-data-lake/
 
 ---
 
-# Fluxo do projeto
+# Funcionamento do projeto
 
 ## 1. Ingestão de dados
 
-Os dados são simulados através de arquivos:
+Os dados são armazenados em diferentes formatos:
 
 * CSV
 * JSON
 
-Armazenados na camada `raw`.
+Simulando um Data Lake moderno capaz de armazenar múltiplos tipos de dados.
 
 ---
 
-## 2. ETL
+## 2. Consulta analítica
 
-O script `etl.py` realiza:
-
-* Extração dos dados
-* Transformação e limpeza
-* Padronização
-* Conversão para Parquet
-
-Os dados tratados são salvos em:
-
-```txt
-/data_lake/processed/
-```
-
----
-
-## 3. Consulta analítica
-
-O script `consulta.py` utiliza DuckDB para executar consultas SQL diretamente sobre arquivos Parquet.
+O script `consulta.py` utiliza DuckDB para realizar consultas SQL diretamente sobre os arquivos do Data Lake.
 
 Exemplo:
 
 ```sql
-SELECT categoria, SUM(valor)
-FROM vendas
-GROUP BY categoria;
+SELECT *
+FROM read_csv_auto('vendas_janeiro.csv')
+UNION ALL
+SELECT *
+FROM read_json_auto('vendas_fevereiro.json')
 ```
 
 ---
@@ -117,23 +96,15 @@ venv\Scripts\activate
 ## Instalar dependências
 
 ```bash
-pip install pandas duckdb pyarrow
+pip install duckdb
 ```
 
 ---
 
-## Executar ETL
+## Executar consulta
 
 ```bash
 cd scripts
-python etl.py
-```
-
----
-
-## Executar consultas analíticas
-
-```bash
 python consulta.py
 ```
 
@@ -141,11 +112,10 @@ python consulta.py
 
 # Conceitos abordados
 
-* Cloud Storage (simulado localmente)
+* Cloud Storage
 * Data Lake
 * Lakehouse
-* ETL
-* OLAP
+* SQL Analytics
 * Big Data
 * Arquitetura moderna de dados
 
