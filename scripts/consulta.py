@@ -3,14 +3,15 @@ import duckdb
 con = duckdb.connect()
 
 resultado = con.execute("""
-    SELECT
-        categoria,
-        SUM(valor) AS total_vendas,
-        COUNT(*) AS quantidade_vendas
-    FROM '../data_lake/processed/vendas_tratadas.parquet'
-    GROUP BY categoria
-    ORDER BY total_vendas DESC
+
+SELECT *
+FROM read_csv_auto('../data_lake/raw/vendas_janeiro.csv')
+
+UNION ALL
+
+SELECT *
+FROM read_json_auto('../data_lake/raw/vendas_fevereiro.json')
+
 """).fetchdf()
 
-print("\nRELATÓRIO ANALÍTICO")
 print(resultado)
