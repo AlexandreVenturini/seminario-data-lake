@@ -1,0 +1,26 @@
+[
+  {
+    "id": 6,
+    "produto": "Headset",
+    "categoria": "Eletrônicos",
+    "loja": "Vitória",
+    "valor": 350,
+    "data": "2026-02-02"
+  },
+  {
+    "id": 7,
+    "produto": "Mesa",
+    "categoria": "Móveis",
+    "loja": "Serra",
+    "valor": 700,
+    "data": "2026-02-05"
+  },
+  {
+    "id": 8,
+    "produto": "Notebook",
+    "categoria": "Eletrônicos",
+    "loja": "Cariacica",
+    "valor": 5200,
+    "data": "2026-02-10"
+  }
+]
